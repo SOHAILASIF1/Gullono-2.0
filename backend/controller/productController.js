@@ -20,7 +20,7 @@ export const uploadProduct=async(req,res)=>{
         })
         
     } catch (error) {
-        console.log(error.message);
+      
         return res.status(500).json({
             success:false,
             error:true,
@@ -41,7 +41,7 @@ export const getAllProduct=async(req,res)=>{
         })
         
     } catch (error) {
-        console.log(error.message);
+      
         return res.status(500).json({
             success:false,
             error:true,
@@ -101,17 +101,15 @@ export const updateProduct = async (req, res) => {
             });
         }
 
-        console.log("Request Body:", req.body);
-        console.log("Update Fields:", updateFields);
 
         // Update product
         const updatedProduct = await Product.findByIdAndUpdate(
-            _id,
-            { $set: updateFields },
-            { new: true, runValidators: true }
-          );
+  req.body._id,
+  req.body, // ✅ direct use karo
+  { new: true, runValidators: true }
+);
           
-        console.log(updateProduct);
+        
 
         if (!updatedProduct) {
             return res.status(404).json({
@@ -127,12 +125,11 @@ export const updateProduct = async (req, res) => {
             message: "Product Updated Successfully",
             data: updatedProduct
         });
-        console.log(res.json);
-
+   
 
 
     } catch (error) {
-        console.error("Update Product Error:", error);
+    
         return res.status(500).json({
             success: false,
             error: true,

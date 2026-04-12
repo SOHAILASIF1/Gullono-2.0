@@ -1,4 +1,5 @@
 import SummaryApi from "../commen";
+import { toast } from 'react-toastify';
 
 const fetchCategoryWiseProduct=async(category)=>{
     try {
@@ -20,7 +21,7 @@ const fetchCategoryWiseProduct=async(category)=>{
         return response;
         
     } catch (error) {
-        console.log(error);
+        toast.error(error.message);
         
     }
 }

@@ -17,6 +17,7 @@ function ProductDetail() {
     sizes: [],
   });
   const [activeImg, setActiveImg] = useState("");
+  const [selectedColor, setSelectedColor] = useState(null);
   const [selectedSize, setSelectedSize] = useState(null); // ✅ selected size
   const { fetchCount } = useContext(Context);
   const params = useParams();
@@ -39,44 +40,53 @@ function ProductDetail() {
     }
   };
 
-  const addToCart = async () => {
-    try {
-      // agar product me size hain to aur user ne select nahi kiya
-      if (data?.sizes?.length > 0 && !selectedSize) {
-        alert("Please select a size first!");
-        return;
-      }
-  
-      const payload = {
-        productId: data._id,
-      };
-  
-      // sirf tab size bhejo jab product me size available ho
-      if (data?.sizes?.length > 0) {
-        payload.size = selectedSize;
-      }
-  
-      const res = await fetch(SummaryApi.addToCart.url, {
-        method: SummaryApi.addToCart.method,
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify(payload),
-      });
-  
-      const resData = await res.json();
-      if (resData.success) {
-        toast.success("Product added to cart!");
-        fetchCount(); // ✅ cart counter update
-      } else {
-        toast.error(resData.message);
-      }
-    } catch (error) {
-      console.error("Error adding to cart:", error);
+ const addToCart = async () => {
+  try {
+    if (data?.sizes?.length > 0 && !selectedSize) {
+      alert("Please select a size first!");
+      return;
     }
-  };
-  
+
+    // ✅ NEW: color validation
+    if (data?.colors?.length > 0 && !selectedColor) {
+      alert("Please select a color first!");
+      return;
+    }
+
+    const payload = {
+      productId: data._id,
+    };
+
+    if (data?.sizes?.length > 0) {
+      payload.size = selectedSize;
+    }
+
+    // ✅ NEW: send color
+    if (data?.colors?.length > 0) {
+      payload.color = selectedColor;
+    }
+
+    const res = await fetch(SummaryApi.addToCart.url, {
+      method: SummaryApi.addToCart.method,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify(payload),
+    });
+
+    const resData = await res.json();
+
+    if (resData.success) {
+      toast.success("Product added to cart!");
+      fetchCount();
+    } else {
+      toast.error(resData.message);
+    }
+  } catch (error) {
+    console.error("Error adding to cart:", error);
+  }
+};
   
 
   const handleBuyNow = () => {
@@ -178,6 +188,30 @@ function ProductDetail() {
               </div>
             </div>
           )}
+
+          {/* Colors Section */}
+{/* Colors Section */}
+{data?.colors && data.colors.length > 0 && (
+  <div className="mt-4">
+    <h3 className="text-lg font-semibold mb-2">Available Colors:</h3>
+
+    <div className="flex flex-wrap gap-3">
+      {data.colors.map((color, index) => (
+        <button
+          key={index}
+          onClick={() => setSelectedColor(color)}
+          className={`px-4 py-2 rounded-md border text-sm sm:text-base transition 
+            ${selectedColor === color
+              ? "bg-amber-500 text-white border-amber-600"
+              : "bg-amber-100 border-amber-400 text-amber-800 hover:bg-amber-200"
+            }`}
+        >
+          {color}
+        </button>
+      ))}
+    </div>
+  </div>
+)}
 
           {/* Description */}
           <p className="text-slate-600 leading-relaxed text-sm sm:text-base">

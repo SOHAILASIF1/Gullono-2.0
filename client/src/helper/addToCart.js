@@ -1,4 +1,5 @@
 import SummaryApi from "../commen";
+import { toast } from 'react-toastify';
 
 const addCart = async (e, id, size = null, hasSizes = false) => {
   e?.stopPropagation();
@@ -30,9 +31,8 @@ const addCart = async (e, id, size = null, hasSizes = false) => {
       toast.error(response.message);
     }
   } catch (error) {
-    console.error("Error adding to cart:", error);
-    const { toast } = await import("react-toastify"); // 👈 fallback
-    toast.error("Something went wrong!");
+   toast.error("Error adding to cart:", error.message);
+  
   }
 };
 

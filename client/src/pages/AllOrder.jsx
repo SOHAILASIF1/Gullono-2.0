@@ -194,24 +194,25 @@ function AllOrder() {
                       >
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                           {order.items.map((item) => (
-                            <div
-                              key={item.productId._id}
-                              className="border p-3 rounded shadow bg-white flex gap-3 items-center"
-                            >
-                              <img
-                                src={item.productId.productImage}
-                                alt={item.productId.productName}
-                                className="w-16 h-16 object-cover rounded"
-                              />
-                              <div>
-                                <p className="font-semibold">
-                                  {item.productId.productName}
-                                </p>
-                                <p>{item.size}</p>
-                                <p>Qty: {item.quantity}</p>
-                                <p>Price: Rs {item.price}</p>
-                              </div>
-                            </div>
+                          <div
+  key={item._id}
+  className="border p-3 rounded shadow bg-white flex gap-3 items-center"
+>
+  <img
+    src={item?.productId?.productImage?.[0] || "/placeholder.png"}
+    alt={item?.productId?.productName || "Product"}
+    className="w-16 h-16 object-cover rounded"
+  />
+  <div>
+    <p className="font-semibold">
+      {item?.productId?.productName || "Unknown Product"}
+    </p>
+    <p>Size: {item?.size || "-"}</p>
+    <p>Color: {item?.color || "-"}</p>
+    <p>Qty: {item?.quantity}</p>
+    <p>Price: Rs {item?.price}</p>
+  </div>
+</div>
                           ))}
                         </div>
                       </td>

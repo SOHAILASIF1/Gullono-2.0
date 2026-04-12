@@ -2,7 +2,7 @@ const backendDomain ="https://gullono-2-0.onrender.com";
 // const backendDomain ="http://localhost:7000";
 
 
-console.log(backendDomain);
+
 
 const SummaryApi = {
     signup: {

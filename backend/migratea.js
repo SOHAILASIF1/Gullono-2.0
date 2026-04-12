@@ -8,14 +8,14 @@ dotenv.config();
 const migrateInventory = async () => {
   try {
     await mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true });
-    console.log("✅ DB connected for Inventory Migration...");
+  
 
     const products = await Product.find();
 
     for (const product of products) {
       // --- Safe fixes ---
       if (!product.category || product.category.trim() === "") {
-        product.category = "uncategorized";
+        product.category = "uncategorized"; 
       }
 
       if (Array.isArray(product.sizes)) {
@@ -45,13 +45,13 @@ const migrateInventory = async () => {
       }
 
       await product.save();
-      console.log(`✅ Migrated product: ${product.productName}`);
+  
     }
 
-    console.log("🎉 Inventory Migration Done!");
+   
     mongoose.disconnect();
   } catch (err) {
-    console.error("❌ Migration error:", err);
+    
     mongoose.disconnect();
   }
 };

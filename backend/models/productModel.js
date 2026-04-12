@@ -23,13 +23,17 @@ const productSchema = new mongoose.Schema(
       type: String,
       required: true
     },
+
     sizes: [
-        {
-          size: { type: String, required: true },
-          inventory: { type: Number, default: 0 },
-        }
-      ],
-      
+      {
+        size: { type: String, required: true },
+        inventory: { type: Number, default: 0 },
+      }
+    ],
+
+    // ✅ NEW FIELD (COLORS)
+   colors: [String],
+
     description: {
       type: String,
       required: true

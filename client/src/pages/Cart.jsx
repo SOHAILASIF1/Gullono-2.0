@@ -9,6 +9,9 @@ function Cart() {
   const [data, setData] = useState([]);
   const navigate = useNavigate();
 
+  // console.log(data.colors[0]);
+  
+
   // ✅ Fetch all cart products
   const fetchAllCartProduct = async () => {
     try {
@@ -80,7 +83,7 @@ function Cart() {
   const totalQuantity = data.reduce((acc, item) => acc + item.quantity, 0);
   const totalPrice = data.reduce(
     (acc, item) => acc + item.quantity * item.productId?.sellingPrice,
-    0
+    350
   );
 
   useEffect(() => {
@@ -131,6 +134,19 @@ function Cart() {
                     Size: <span className="font-medium">{product.size}</span>
                   </p>
                 )}
+
+                 {/* Selected Color */}
+{product?.color ? (
+  <p className="text-sm text-gray-600 mt-1">
+    Color: <span className="font-medium">{product.color}</span>
+  </p>
+) : product?.productId?.colors?.length > 0 && (
+  <p className="text-sm text-gray-600 mt-1">
+    Colors: <span className="font-medium">
+      {product.productId.colors.join(", ")}
+    </span>
+  </p>
+)}
 
                 {/* Price Info */}
                 <div className="flex items-center justify-between gap-4 mt-1">

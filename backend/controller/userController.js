@@ -7,7 +7,7 @@ import Product from "../models/productModel.js";
 export const signup=async(req,res)=>{
     try {
         const {fullName,email,password}=req.body
-        console.log(fullName);
+
         const user=await User.findOne({email})
         if (user) {
             return res.status(401).json({
@@ -179,7 +179,8 @@ export const userDetail = async (req, res) => {
 
       }
       const user=await User.findById(session)
-      console.log(user?.role);
+
+
       const updateUser=await User.findByIdAndUpdate(userId, payload)
       return res.status(200).json({
         success:true,
@@ -200,9 +201,9 @@ export const userDetail = async (req, res) => {
 
  
   
-  export const addCart = async (req, res) => {
+export const addCart = async (req, res) => {
     try {
-      const { productId, size } = req.body;
+      const { productId, size, color } = req.body;  // ✅ color bhi lo
       const userId = req.userId;
   
       if (!productId) {
@@ -213,7 +214,6 @@ export const userDetail = async (req, res) => {
         });
       }
   
-      // ✅ product fetch karo
       const product = await Product.findById(productId);
       if (!product) {
         return res.status(404).json({
@@ -223,7 +223,6 @@ export const userDetail = async (req, res) => {
         });
       }
   
-      // ✅ check karo agar product me sizes hain to size required hai
       if (product.sizes.length > 0 && !size) {
         return res.status(400).json({
           success: false,
@@ -231,12 +230,20 @@ export const userDetail = async (req, res) => {
           message: "Size is required for this product",
         });
       }
-  
-      // ✅ check agar same product + same size already cart me hai
-      const query = { productId, userId };
-      if (product.sizes.length > 0) {
-        query.size = size;
+
+      // ✅ color validation
+      if (product.colors.length > 0 && !color) {
+        return res.status(400).json({
+          success: false,
+          error: true,
+          message: "Color is required for this product",
+        });
       }
+  
+      // ✅ same product + same size + same color cart me check karo
+      const query = { productId, userId };
+      if (product.sizes.length > 0) query.size = size;
+      if (product.colors.length > 0) query.color = color;  // ✅ color bhi check karo
   
       const existingCart = await Cart.findOne(query);
       if (existingCart) {
@@ -253,9 +260,8 @@ export const userDetail = async (req, res) => {
         quantity: 1,
       };
   
-      if (product.sizes.length > 0) {
-        payload.size = size;
-      }
+      if (product.sizes.length > 0) payload.size = size;
+      if (product.colors.length > 0) payload.color = color;  // ✅ color save karo
   
       const cart = new Cart(payload);
       const savedCart = await cart.save();
@@ -267,7 +273,7 @@ export const userDetail = async (req, res) => {
         data: savedCart,
       });
     } catch (error) {
-      console.log(error);
+
       return res.status(500).json({
         success: false,
         error: true,
@@ -282,9 +288,9 @@ export const userDetail = async (req, res) => {
   export const countCart=async(req,res)=>{
     try {
       const userId=req?.userId
-      console.log("UserId:", req.userId, "Type:", typeof req.userId);
+   
       const allCarts = await Cart.find({});
-console.log(allCarts);
+
 
 
       const count=await Cart.countDocuments({
@@ -321,7 +327,7 @@ export const getCartProduct=async(req,res)=>{
       data:allCartProduct
     })
   } catch (error) {
-    console.log(error);
+    
     return res.status(500).json({
 
       message:error.message,

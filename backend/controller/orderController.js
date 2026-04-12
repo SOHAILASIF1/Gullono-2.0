@@ -1,5 +1,6 @@
 import Order from "../models/orderModel.js";
 
+
 export const orderCreate=async (req, res) => {
     try {
       const { fullName, phone, email, address, paymentMethod, cartItems } = req.body;
@@ -19,7 +20,8 @@ export const orderCreate=async (req, res) => {
           productId: item.productId._id,
           quantity: item.quantity,
           price: item.productId.sellingPrice,
-          size:item.size
+          size:item.size,
+           color: item.color, 
         })),
       });
   
@@ -27,7 +29,7 @@ export const orderCreate=async (req, res) => {
   
       res.json({ success: true, message: "Order placed successfully" });
     } catch (error) {
-      console.log("Order creation failed", error);
+     
       res.status(500).json({ success: false, message: "Server error" });
     }
   }
@@ -36,7 +38,7 @@ export const orderCreate=async (req, res) => {
   export const getOrders=async(req,res)=>{
     try {
         const session=req?.userId
-        const getOrder=await Order.find({})
+      const getOrder = await Order.find({}).populate("items.productId")  // ✅ yeh hona chahiye
         return res.status(200).json({
             message:"ok",
             success:true,
@@ -108,7 +110,7 @@ export const orderCreate=async (req, res) => {
       })
       
     } catch (error) {
-      log.error("Failed to fetch delivered orders and", error);
+    
       return res.status(500).json({
         message:error.message,
         success:false,

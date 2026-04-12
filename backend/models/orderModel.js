@@ -8,10 +8,11 @@ const orderSchema = new mongoose.Schema({
   paymentMethod: String,
   items: [
     {
-      productId: { type: mongoose.Schema.Types.ObjectId, ref: "products" },
+     productId: { type: mongoose.Schema.Types.ObjectId, ref: "Product" },  // ✅ "Product" capital P
       quantity: Number,
       price: Number,
       size: String,
+      color: String, 
     },
   ],
   status: {

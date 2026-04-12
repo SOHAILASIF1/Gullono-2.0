@@ -1,60 +1,73 @@
 const productCategory = {
-  boys: [
-    { id: 1, label: "pair", value: "pair" },
-    { id: 2, label: "hoodie", value: "hoodie" },
-    { id: 3, label: "Jeans", value: "jeans" },
-    { id: 4, label: "bottom", value: "bottom" },
-    { id: 5, label: "pants", value: "pants" },
-    { id: 6, label: "trousers", value: "trousers" },
-
-
-    { id: 7, label: "Sweatshirts", value: "sweatshirts" },
-    { id: 8, label: "sweaters", value: "sweaters" },
-
-  ],
-  boysSummer:[
-    { id: 1, label: "pair", value: "pair" },
-    { id: 2, label: "t-shirts", value: "t-shirts" },
-    { id: 3, label: "polo", value: "polo" },
-    { id: 4, label: "shorts", value: "shorts" },
-    { id: 5, label: "pants", value: "pants" },
-    { id: 6, label: "trousers", value: "trousers" },
-
-  ],
-  girlsWinter: [
-    { id: 1, label: "pair", value: "pair-girl" },
-    { id: 2, label: "Tops", value: "tops" },
-    { id: 3, label: "sweatshirts", value: "sweatshirts-girl" },
-    { id: 4, label: "jacket", value: "jacket" },
-    { id: 5, label: "hoddie", value: "hoddie" },
-    { id: 6, label: "pants", value: "pants-girl" },
-    { id: 7, label: "trousers", value: "trousers-girl" },
-    { id: 8, label: "tight", value: "tight-girl" },
-    { id: 9, label: "bottom", value: "bottom-girl" },
-
-
-  ],
-  girlsSummer:[
-    { id: 1, label: "pair", value: "pair-girl" },
-    { id: 2, label: "t-shirts", value: "t-shirts-girl" },
-    { id: 3, label: "top", value: "tops" },
-    { id: 4, label: "eastren wear", value: "eastern" },
-    { id: 5, label: "pants", value: "pants-girl" },
-    
-  ],
+  boys: {
+    summer: [
+      { id: 1, label: "Pair", value: "pair" },
+      { id: 2, label: "T-Shirts", value: "t-shirts" },
+      { id: 3, label: "Polo Shirts", value: "polo-shirts" },
+      { id: 4, label: "Casual Shirts", value: "casual-shirts" },
+      { id: 5, label: "Double Shirts", value: "double-shirts" },
+      { id: 6, label: "Jeans", value: "jeans" },
+      { id: 7, label: "Shorts", value: "shorts" },
+      { id: 8, label: "Pants", value: "pants" },
+      { id: 9, label: "Trousers", value: "trousers" },
+    ],
+    winter: [
+      { id: 1, label: "Pair", value: "pair-boys" },
+      { id: 2, label: "Sweatshirts", value: "sweatshirts-boys" },
+      { id: 3, label: "Jackets", value: "jacket" },
+      { id: 4, label: "Hoodies", value: "hoodies" },
+      { id: 5, label: "Sweaters", value: "sweaters" },
+      { id: 6, label: "Pants", value: "pants-boys" },
+      { id: 7, label: "Trousers", value: "trousers-boys" },
+    ],
+    eastern: [
+      { id: 1, label: "Kurta Suits", value: "kurta" },
+    ],
+    newbornAndToddler: [
+      { id: 1, label: "Bodysuits", value: "bodysuits" },
+    ],
+    teen: [
+      { id: 1, label: "Shirts", value: "shirts" },
+      { id: 2, label: "Polos", value: "polos" },
+      { id: 3, label: "Bottoms", value: "bottoms" },
+      { id: 4, label: "Hoodies", value: "hoodies" },
+    ],
+  },
+  girls: {
+    summer: [
+      { id: 1, label: "Pair", value: "pair-girl" },
+      { id: 2, label: "T-Shirts", value: "t-shirts-girl" },
+      { id: 3, label: "Tops", value: "tops" },
+      { id: 4, label: "Pants", value: "pants-girl" },
+      { id: 5, label: "Shorts", value: "shorts" },
+    ],
+    winter: [
+      { id: 1, label: "Pair", value: "pair-girl" },
+      { id: 2, label: "Tops", value: "tops" },
+      { id: 3, label: "Sweatshirts", value: "sweatshirts-girl" },
+      { id: 4, label: "Jackets", value: "jacket" },
+      { id: 5, label: "Hoodies", value: "hoodies" },
+      { id: 6, label: "Sweaters", value: "sweaters" },
+      { id: 7, label: "Pants", value: "pants-girl" },
+      { id: 8, label: "Trousers", value: "trousers-girl" },
+      { id: 9, label: "Tights", value: "tights-girl" },
+    ],
+    eastern: [
+      { id: 1, label: "3-Piece Kurti Suits", value: "3-piece-kurti" },
+      { id: 2, label: "2-Piece Kurti Suits", value: "2-piece-kurti" },
+    ],
+    newbornAndToddler: [
+      { id: 1, label: "Bodysuits", value: "bodysuits" },
+    ],
+    teen: [
+      { id: 1, label: "Shirts", value: "shirts" },
+      { id: 2, label: "Tops", value: "tops" },
+      { id: 3, label: "Bottoms", value: "bottoms" },
+      { id: 4, label: "Hoodies", value: "hoodies" },
+    ],
+  },
   newborn: [
-    { id: 1, label: "Onesies", value: "onesies" },
-    { id: 2, label: "Rompers", value: "rompers" },
-    { id: 3, label: "Swaddles", value: "swaddles" },
-    { id: 4, label: "Bodysuits", value: "bodysuits" },
-    { id: 5, label: "Booties", value: "booties" },
-  ],
-  teen: [
-    { id: 1, label: "Hoodies", value: "hoodies" },
-    { id: 2, label: "Jeans", value: "jeans" },
-    { id: 3, label: "T-Shirts", value: "t_shirts" },
-    { id: 4, label: "Dresses", value: "dresses" },
-    { id: 5, label: "Joggers", value: "joggers" },
+    { id: 1, label: "Bodysuits", value: "bodysuits" },
   ],
 };
 

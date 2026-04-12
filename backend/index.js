@@ -1,4 +1,4 @@
-console.log("🔥 RUNNING THIS INDEX FILE 🔥")
+
 
 
 import express from 'express'

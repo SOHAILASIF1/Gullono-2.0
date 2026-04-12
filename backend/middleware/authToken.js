@@ -12,7 +12,7 @@ export const authToken=async(req,res,next)=>{
         }
         jwt.verify(token,process.env.SECRET,(err,decoded)=>{
             if (err) {
-                console.log(err.message);
+           
                 return res.status(403).json({
                     success:false,
                     error:true,
@@ -21,7 +21,7 @@ export const authToken=async(req,res,next)=>{
                 
             }
             req.userId=decoded?._id
-            console.log("Decoded user ID:", req.userId);
+         
             next()
         })
 

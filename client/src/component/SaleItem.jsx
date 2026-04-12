@@ -3,6 +3,7 @@ import SummaryApi from '../commen';
 import { Link } from 'react-router-dom';
 import { Context } from '../App';
 import addCart from '../helper/addToCart';
+import { toast } from 'react-toastify';
 
 function SaleItem({heading}) {
   const [showAll, setShowAll] = useState(false);
@@ -22,17 +23,17 @@ function SaleItem({heading}) {
                 setData(result.data);
                 setLoading(false);
             } else {
-                console.error('Error fetching sale items:', result.message);
+                toast.error(error.messagre)
             }
         } catch (error) {
-            console.error('Network error:', error);
+            toast.error('Network error:', error);
         }
     }
 
 
 
     const saleItem = data.filter((item) => item.saleItem === true);
-    console.log(saleItem);
+    
 
     
   const productsToShow = showAll ? saleItem : saleItem?.slice(0, 8);

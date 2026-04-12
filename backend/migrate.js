@@ -35,10 +35,10 @@ const migrateSizesWithInventory = async () => {
       }
     }
 
-    console.log("🎉 Migration completed successfully!");
+ 
     process.exit();
   } catch (err) {
-    console.error("❌ Migration error:", err.message);
+
     process.exit(1);
   }
 };
