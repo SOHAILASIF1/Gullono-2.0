@@ -8,6 +8,20 @@ import { toast } from "react-toastify";
 import DisplayImage from "./DisplayImage";
 
 function UploadProduct({ onClose, fetchData }) {
+
+  const defaultSizes = [
+  { size: "9-10 months", inventory: 0 },
+  { size: "12-18 months", inventory: 0 },
+  { size: "18-24 months", inventory: 0 },
+  { size: "2-3 years", inventory: 0 },
+  { size: "3-4 years", inventory: 0 },
+  { size: "4 years", inventory: 0 },
+  { size: "5 years", inventory: 0 },
+  { size: "6-7 years", inventory: 0 },
+  { size: "8-9 years", inventory: 0 },
+  { size: "10-11 years", inventory: 0 },
+  { size: "12-13 years", inventory: 0 },
+];
   const [fullScreenUrl, setFullScreenUrl] = useState("");
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [sizeInput, setSizeInput] = useState("");
@@ -23,7 +37,7 @@ function UploadProduct({ onClose, fetchData }) {
     productImage: [],
     price: null,
     sellingPrice: null,
-    sizes: [],
+    sizes: defaultSizes,
     colors: [],
     description: "",
   });
